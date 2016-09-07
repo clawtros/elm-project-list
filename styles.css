@@ -1,0 +1,26 @@
+.active {
+    background-color: #ff7;
+}
+
+.inactive {
+    color: #ccc;
+}
+
+.active, .inactive {
+    cursor: pointer;
+}
+
+.menu, .content {
+    display: inline-block;
+}
+
+.menu {
+    width: 300px;
+    float: left;
+}
+
+.content iframe {
+    border: 0;
+    width: calc(100vw - 300px);
+    height: 100vh;    
+}
