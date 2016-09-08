@@ -1,13 +1,20 @@
 .active {
-    background-color: #ff7;
+    border-radius: 5px;
 }
 
 .inactive {
     color: #ccc;
 }
 
-.active, .inactive {
+.item {
+    transition: color 0.25s, background-color 0.25s;
     cursor: pointer;
+    display: block;
+    padding: 10px 20px;
+}
+
+.item:hover {
+    text-decoration: underline;
 }
 
 .menu, .content {
@@ -19,8 +26,26 @@
     float: left;
 }
 
+body * {
+    box-sizing: border-box;
+}
+
 .content iframe {
     border: 0;
     width: calc(100vw - 300px);
-    height: 100vh;    
+    height: 100vh;
+}
+
+.menu {
+    padding: 20px;
+    font-family: monospace;
+}
+
+h1 {
+    margin: 20px;
+}
+
+.description {
+    margin: 20px;
+    font-family: sans-serif;
 }
