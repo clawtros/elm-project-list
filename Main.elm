@@ -1,12 +1,10 @@
 module Portfolio exposing (..)
 
-import Debug exposing (log)
-import Array
 
-import Html.App
 import Html exposing (..)
-import Html.Events exposing (onClick)
+import Html.App
 import Html.Attributes exposing (class, rel, href, src)
+import Html.Events exposing (onClick)
 
 type alias Project = { name : String, url : String, description: String }
 type alias Model = { projects : List Project, current : Int}
@@ -32,7 +30,7 @@ initialModel =
                  , makeProject "Goop""http://clawtros.com/goop/" "I have no idea how this works."
                  , makeProject "Glitchy Art Maker" "http://clawtros.com/backgrounds/" "Attempting to recreate goop."
                  , makeProject "Mandelbrot" "http://mandelbutt.com/" "Raw WebGL Mandelbrot zoomer."
-                 , makeProject "Terrain" "http://clawtros.com/maze-terrain/" "Experimenting with maze generation, A* algorithms and THREE.js to make a strange thing"
+                 , makeProject "Terrain" "http://clawtros.com/maze-terrain/" "Accidentally made while experimenting with maze generation, the A* algorithm and THREE.js"
                  , makeProject "Crossword Player" "http://clawtros.com/clientcross/" "Reacty Crossword player"
                  , makeProject "D3 Update/Exit" "http://clawtros.com/d3.html" "Getting D3 enter/update/exit sorted"
                  , makeProject "Worst Phonetic Dictionary" "http://phonetic.removablefeast.com/" "Bad phonetic dictionaries"
