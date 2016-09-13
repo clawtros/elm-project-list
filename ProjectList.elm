@@ -1,7 +1,8 @@
-module Portfolio exposing (..)
+module ProjectList exposing (..)
 
 import Navigation
 import String
+
 import Html exposing (..)
 import Html.App
 import Html.Attributes exposing (class, rel, href, src)
