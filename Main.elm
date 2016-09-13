@@ -1,20 +1,25 @@
 module Portfolio exposing (..)
 
+import Navigation
 
 import Html exposing (..)
 import Html.App
 import Html.Attributes exposing (class, rel, href, src)
 import Html.Events exposing (onClick)
 
-type alias Project = { name : String, url : String, description: String }
-type alias Model = { projects : List Project, current : Int}
+type alias Project = { name : String, url : String
+                     , description: String
+                     }
+type alias Model = { projects : List Project
+                   , current : Int
+                   }
 type Msg = SelectProject Int
 
 
 listGet : List a -> Int -> Maybe a
 listGet xs n = List.head (List.drop n xs)
 
-    
+
 makeProject : String -> String -> String -> Project
 makeProject projectName projectURL description =
     { name = projectName
@@ -34,7 +39,7 @@ initialModel =
                  , makeProject "Crossword Player" "http://clawtros.com/clientcross/" "Reacty Crossword player"
                  , makeProject "D3 Update/Exit" "http://clawtros.com/d3.html" "Getting D3 enter/update/exit sorted"
                  , makeProject "Worst Phonetic Dictionary" "http://phonetic.removablefeast.com/" "Bad phonetic dictionaries"
-                 , makeProject "Crossword Generator" "http://clawtros.com/recursin-workers/" "Recursive crossword solver"
+                 , makeProject "Crossword Generator" "http://clawtros.com/recursin-workers/" "Recursive web workers generating crosswords"
                  , makeProject "Floating" "http://clawtros.com/floating.html" "Dots floating on vectors."
                  , makeProject "Marriage" "http://deeznups.clawtros.com/" "Solving life's greatest problems"
                  , makeProject "Lorenz" "http://clawtros.com/waterwheel/" "Playing with Canvas and D3."
@@ -42,7 +47,7 @@ initialModel =
                  , makeProject "Minutes til' Five" "http://minutes-til-five.com/" ""
                  , makeProject "Ulam Spirals" "http://removablefeast.com/spiral.html" ""
                  , makeProject "Cat Look" "http://removablefeast.com/catlook" ""
-                 , makeProject "Deal With Itifier" "http://deal.removablefeast.com/catlook" ""
+                 , makeProject "Deal With Itifier" "http://deal.removablefeast.com/?url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*l7zNW_4-afEOfP_mXxs75w.jpeg" ""
                  , makeProject "Drips" "http://clawtros.com/drips" ""
                  , makeProject "Bouncing Balls" "http://clawtros.com/google-bouncing-balls/" ""
                  , makeProject "Alternate Fingering" "http://fingers.removablefeast.com/" ""
@@ -52,7 +57,7 @@ initialModel =
     , current = 1
     }
 
-    
+
 css : String -> Html Msg
 css path =
   node "link" [ rel "stylesheet", href path ] []
@@ -63,14 +68,13 @@ getCurrent model = Maybe.withDefault {name=""
                                      , url=""
                                      , description=""}
                    (listGet model.projects model.current)
-    
-      
+
 view : Model -> Html Msg
 view model =
-    div [] [
+    div [class "container"] [
          div [class "menu"] [
               h1 [ ] [text "clawtros.com"]
-             , css "http://localhost:8080/elport/styles.css"
+             , css "styles.css"
              , div [class "description"]
                   [getCurrent model
                   |> .description
@@ -86,16 +90,27 @@ view model =
                                         |> src] []]
         ]
 
-update : Msg -> Model -> Model
+        
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         SelectProject index ->
-            {model | current = index}
-                
+            ( {model | current = index}, Cmd.none )
+
+           
+init : ( Model, Cmd Msg )
+init =
+    (initialModel, Cmd.none)
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none 
 
 main : Program Never
-main = Html.App.beginnerProgram
-       { model = initialModel
+main = Html.App.program
+       { init = init
        , view = view
        , update = update
+       , subscriptions = subscriptions
        }
