@@ -45,15 +45,15 @@ initialModel =
                  , makeProject "Marriage" "http://deeznups.clawtros.com/" "Solving life's greatest problems"
                  , makeProject "Lorenz" "http://clawtros.com/waterwheel/" "Playing with Canvas and D3."
                  , makeProject "Voronoi" "http://clawtros.com/voronoi/" "Naive Voronoi shades."
-                 , makeProject "Minutes til' Five" "http://minutes-til-five.com/" ""
-                 , makeProject "Ulam Spirals" "http://removablefeast.com/spiral.html" ""
-                 , makeProject "Cat Look" "http://removablefeast.com/catlook" ""
-                 , makeProject "Deal With Itifier" "http://deal.removablefeast.com/?url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*l7zNW_4-afEOfP_mXxs75w.jpeg" ""
-                 , makeProject "Drips" "http://clawtros.com/drips" ""
-                 , makeProject "Bouncing Balls" "http://clawtros.com/google-bouncing-balls/" ""
+                 , makeProject "Minutes til' Five" "http://minutes-til-five.com/" "Countdown Clock"
+                 , makeProject "Ulam Spirals" "http://removablefeast.com/spiral.html" "I think this was the first thing I made with Canvas?"
+                 , makeProject "Cat Look" "http://removablefeast.com/catlook" "Cats looking"
+                 , makeProject "Deal With Itifier" "http://deal.removablefeast.com/?url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*l7zNW_4-afEOfP_mXxs75w.jpeg" "Sunglass Applicator"
+                 , makeProject "Drips" "http://clawtros.com/drips" "Averaging HSV colours with surroundings"
+                 , makeProject "Bouncing Balls" "http://clawtros.com/google-bouncing-balls/" "Modification of a recreation of a Google Doodle"
                  , makeProject "Alternate Fingering" "http://fingers.removablefeast.com/" ""
-                 , makeProject "Name Generators" "http://names.removablefeast.com/" ""
-                 , makeProject "TTC Locator" "http://ttc.removablefeast.com/" ""
+                 , makeProject "Name Generators" "http://names.removablefeast.com/" "NLTK"
+                 , makeProject "TTC Locator" "http://ttc.removablefeast.com/" "All the Toronto Transit Commission vehicles"
                  ]
     , current = 1
     }
