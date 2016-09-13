@@ -1,5 +1,5 @@
-.active {
-    border-radius: 5px;
+body * {
+    box-sizing: border-box;
 }
 
 .inactive {
@@ -7,7 +7,6 @@
 }
 
 .item {
-    transition: color 0.25s, background-color 0.25s;
     cursor: pointer;
     display: block;
     padding: 10px 20px;
@@ -17,23 +16,23 @@
     text-decoration: underline;
 }
 
-.menu, .content {
-    display: inline-block;
-}
-
 .menu {
-    width: 300px;
-    float: left;
+    width: 280px;
+    height: 100vh;
+    overflow-y: auto;
 }
 
-body * {
-    box-sizing: border-box;
+.container {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
 }
 
 .content iframe {
     border: 0;
-    width: calc(100vw - 300px);
+    width: calc(100vw - 280px);
     height: 100vh;
+    overflow: hidden;
 }
 
 .menu {
@@ -48,4 +47,6 @@ h1 {
 .description {
     margin: 20px;
     font-family: sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
 }
