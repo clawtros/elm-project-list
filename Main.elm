@@ -1,6 +1,7 @@
 module Portfolio exposing (..)
 
 import Navigation
+import String
 
 import Html exposing (..)
 import Html.App
@@ -93,24 +94,55 @@ view model =
         
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case msg of
-        SelectProject index ->
-            ( {model | current = index}, Cmd.none )
+    let
+        newModel = 
+            case msg of
+                SelectProject index ->
+                    {model | current = index}
+    in
+        (newModel, Navigation.newUrl (toUrl newModel) )
 
            
-init : ( Model, Cmd Msg )
-init =
-    (initialModel, Cmd.none)
+init : Result String Int -> ( Model, Cmd Msg )
+init result =
+    urlUpdate result initialModel
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none 
 
+
+toUrl : Model -> String
+toUrl model =
+  "#/" ++ toString (.current model)
+
+
+fromUrl : String -> Result String Int
+fromUrl url =
+  String.toInt (String.dropLeft 2 url)
+
+
+urlParser : Navigation.Parser (Result String Int)
+urlParser =
+  Navigation.makeParser (fromUrl << .hash)
+
+
+urlUpdate : Result String Int -> Model -> (Model, Cmd Msg)
+urlUpdate result model =
+  case result of
+    Ok newIndex ->
+      ({model | current = newIndex}, Cmd.none)
+
+    Err _ ->
+      (model, Cmd.none)
+
+        
 main : Program Never
-main = Html.App.program
+main = Navigation.program urlParser
        { init = init
        , view = view
        , update = update
+       , urlUpdate = urlUpdate
        , subscriptions = subscriptions
        }
