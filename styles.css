@@ -1,5 +1,6 @@
-body * {
+body, body * {
     box-sizing: border-box;
+    margin: 0;
 }
 
 .inactive {
@@ -10,10 +11,13 @@ body * {
     cursor: pointer;
     display: block;
     padding: 10px 20px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.25s;
 }
 
-.item:hover {
-    text-decoration: underline;
+.item.inactive:hover {
+    border-bottom: 2px solid #bbb;
+    color: #222;
 }
 
 .menu {
@@ -49,4 +53,19 @@ h1 {
     font-family: sans-serif;
     font-size: 12px;
     line-height: 1.5;
+}
+
+.project-description {
+    font-size: 88%;
+}
+
+.inactive .project-description {
+    display: none;
+}
+
+.active .project-description{
+    line-height: 1.5;
+    max-height: 100px;
+    text-decoration: none;
+    color: #555;
 }
