@@ -71,15 +71,25 @@ css path =
     node "link" [ rel "stylesheet", href path ] []
 
 
-getCurrent : Model -> Project
+getCurrent : Model -> Maybe Project
 getCurrent model =
-    Maybe.withDefault
-        { name = ""
-        , url = ""
-        , description = ""
-        }
-        (listGet model.projects model.current)
+    listGet model.projects model.current
 
+
+viewCurrent : Model -> Html Msg
+viewCurrent model =
+    case getCurrent model of
+        Just current ->
+            div [ class "content" ]
+                [ iframe
+                      [ current
+                      |> .url
+                      |> src
+                      ]
+                      []
+                ]
+        Nothing ->
+            text ""
 
 viewProject : Int -> Int -> Project -> Html Msg
 viewProject current index project =
@@ -107,14 +117,7 @@ view model =
                     model.projects
                 )
             ]
-        , div [ class "content" ]
-            [ iframe
-                [ getCurrent model
-                    |> .url
-                    |> src
-                ]
-                []
-            ]
+        , viewCurrent model
         ]
 
 
@@ -125,7 +128,7 @@ update msg model =
             { model | current = index } ! [ Navigation.newUrl ("#project/" ++ (toString index)) ]
 
         UrlChange location ->
-            model ! []
+            navigateToLocation model location
 
 
 parseIdFromLocation : Navigation.Location -> Maybe Int
@@ -133,20 +136,20 @@ parseIdFromLocation location =
     parseHash (UrlParser.s "project" </> UrlParser.int) location
 
 
-init : Navigation.Location -> ( Model, Cmd Msg )
-init location =
+navigateToLocation : Model -> Navigation.Location -> ( Model, Cmd Msg )
+navigateToLocation model location =
     case (parseIdFromLocation location) of
         Just value ->
-            { initialModel | current = value } ! []
+            { model | current = value } ! []
 
         Nothing ->
-            initialModel ! []
+            model ! []
 
 
 main : Program Never Model Msg
 main =
     Navigation.program UrlChange
-        { init = init
+        { init = navigateToLocation initialModel
         , view = view
         , update = update
         , subscriptions = (always Sub.none)

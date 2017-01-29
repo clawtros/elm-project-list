@@ -9885,30 +9885,44 @@ var _user$project$ProjectList$parseIdFromLocation = function (location) {
 			_evancz$url_parser$UrlParser$int),
 		location);
 };
-var _user$project$ProjectList$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		if (_p0.ctor === 'SelectProject') {
-			var _p1 = _p0._0;
+var _user$project$ProjectList$navigateToLocation = F2(
+	function (model, location) {
+		var _p0 = _user$project$ProjectList$parseIdFromLocation(location);
+		if (_p0.ctor === 'Just') {
 			return A2(
 				_elm_lang$core$Platform_Cmd_ops['!'],
 				_elm_lang$core$Native_Utils.update(
 					model,
-					{current: _p1}),
+					{current: _p0._0}),
+				{ctor: '[]'});
+		} else {
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				model,
+				{ctor: '[]'});
+		}
+	});
+var _user$project$ProjectList$update = F2(
+	function (msg, model) {
+		var _p1 = msg;
+		if (_p1.ctor === 'SelectProject') {
+			var _p2 = _p1._0;
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{current: _p2}),
 				{
 					ctor: '::',
 					_0: _elm_lang$navigation$Navigation$newUrl(
 						A2(
 							_elm_lang$core$Basics_ops['++'],
 							'#project/',
-							_elm_lang$core$Basics$toString(_p1))),
+							_elm_lang$core$Basics$toString(_p2))),
 					_1: {ctor: '[]'}
 				});
 		} else {
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				model,
-				{ctor: '[]'});
+			return A2(_user$project$ProjectList$navigateToLocation, model, _p1._0);
 		}
 	});
 var _user$project$ProjectList$css = function (path) {
@@ -9932,10 +9946,36 @@ var _user$project$ProjectList$listGet = F2(
 			A2(_elm_lang$core$List$drop, n, xs));
 	});
 var _user$project$ProjectList$getCurrent = function (model) {
-	return A2(
-		_elm_lang$core$Maybe$withDefault,
-		{name: '', url: '', description: ''},
-		A2(_user$project$ProjectList$listGet, model.projects, model.current));
+	return A2(_user$project$ProjectList$listGet, model.projects, model.current);
+};
+var _user$project$ProjectList$viewCurrent = function (model) {
+	var _p3 = _user$project$ProjectList$getCurrent(model);
+	if (_p3.ctor === 'Just') {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('content'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$iframe,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$src(
+							function (_) {
+								return _.url;
+							}(_p3._0)),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return _elm_lang$html$Html$text('');
+	}
 };
 var _user$project$ProjectList$Project = F3(
 	function (a, b, c) {
@@ -10052,22 +10092,6 @@ var _user$project$ProjectList$initialModel = {
 		}
 	},
 	current: 0
-};
-var _user$project$ProjectList$init = function (location) {
-	var _p2 = _user$project$ProjectList$parseIdFromLocation(location);
-	if (_p2.ctor === 'Just') {
-		return A2(
-			_elm_lang$core$Platform_Cmd_ops['!'],
-			_elm_lang$core$Native_Utils.update(
-				_user$project$ProjectList$initialModel,
-				{current: _p2._0}),
-			{ctor: '[]'});
-	} else {
-		return A2(
-			_elm_lang$core$Platform_Cmd_ops['!'],
-			_user$project$ProjectList$initialModel,
-			{ctor: '[]'});
-	}
 };
 var _user$project$ProjectList$Model = F2(
 	function (a, b) {
@@ -10190,29 +10214,7 @@ var _user$project$ProjectList$view = function (model) {
 				}),
 			_1: {
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('content'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$iframe,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$src(
-									function (_) {
-										return _.url;
-									}(
-										_user$project$ProjectList$getCurrent(model))),
-								_1: {ctor: '[]'}
-							},
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}),
+				_0: _user$project$ProjectList$viewCurrent(model),
 				_1: {ctor: '[]'}
 			}
 		});
@@ -10221,7 +10223,7 @@ var _user$project$ProjectList$main = A2(
 	_elm_lang$navigation$Navigation$program,
 	_user$project$ProjectList$UrlChange,
 	{
-		init: _user$project$ProjectList$init,
+		init: _user$project$ProjectList$navigateToLocation(_user$project$ProjectList$initialModel),
 		view: _user$project$ProjectList$view,
 		update: _user$project$ProjectList$update,
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
