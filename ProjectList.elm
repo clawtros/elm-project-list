@@ -3,7 +3,7 @@ module ProjectList exposing (..)
 import Navigation
 import String
 import Html exposing (..)
-import Html.Attributes exposing (class, rel, href, src)
+import Html.Attributes exposing (class, rel, href, src, classList)
 import Html.Events exposing (onClick)
 import UrlParser exposing ((</>), parseHash)
 
@@ -34,7 +34,10 @@ listGet xs n =
 initialModel : Model
 initialModel =
     { projects =
-        [ Project "Cool Synth" "http://www.clawtros.com/synth/" "WebAudio oscillator toy"
+        [ Project "De Jong Attractor" "http://www.clawtros.com/pdj.html" "Click and drag to alter values"
+        , Project "Reaction Diffusion" "http://www.clawtros.com/rd/" "Reaction / Diffusion as a WebGL Shader"
+        , Project "Interactive Joy Division" "http://www.clawtros.com/joy.html" "Hover to make waves"
+        , Project "Cool Synth" "http://www.clawtros.com/synth/" "WebAudio oscillator toy"
         , Project "Text Renderer" "http://www.clawtros.com/textrender.html" "Drop-in ASCII THREE.js renderer."
         , Project "Goop" "http://clawtros.com/goop/" "I have no idea how this works."
         , Project "Glitchy Art Maker" "http://clawtros.com/backgrounds/" "Attempting to recreate goop."
@@ -54,11 +57,12 @@ initialModel =
         , Project "Deal With Itifier" "http://deal.removablefeast.com/?url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*l7zNW_4-afEOfP_mXxs75w.jpeg" "Sunglass Applicator"
         , Project "Drips" "http://clawtros.com/drips" "Averaging HSV colours with surroundings"
         , Project "Bouncing Balls" "http://clawtros.com/google-bouncing-balls/" "Modification of a recreation of a Google Doodle"
-        , Project "Alternate Fingering" "http://fingers.removablefeast.com/" ""
+        , Project "Alternate Fingering" "http://fingers.removablefeast.com/" "Alternate uses of knuckle tattoos"
+        , Project "CSS Parallax" "http://clawtros.com/forest/" "Hover and move the mouse for depthy motion"
         , Project "Name Generators" "http://names.removablefeast.com/" "NLTK"
         , Project "TTC Locator" "http://ttc.removablefeast.com/" "All the Toronto Transit Commission vehicles"
         ]
-    , current = 1
+    , current = 0
     }
 
 
@@ -77,35 +81,29 @@ getCurrent model =
         (listGet model.projects model.current)
 
 
+viewProject : Int -> Int -> Project -> Html Msg
+viewProject current index project =
+    div
+        [ onClick (SelectProject index)
+        , classList
+            [ ( "item", True )
+            , ( "active", current == index )
+            , ( "inactive", not (current == index) )
+            ]
+        ]
+        [ div [ class "project-header" ] [ text project.name ]
+        , div [ class "project-description" ] [ text project.description ]
+        ]
+
+
 view : Model -> Html Msg
 view model =
     div [ class "container" ]
         [ div [ class "menu" ]
             [ h1 [] [ text "clawtros.com" ]
-            , div [ class "description" ]
-                [ getCurrent model
-                    |> .description
-                    |> text
-                ]
             , div []
                 (List.indexedMap
-                    (\index ->
-                        \project ->
-                            div []
-                                [ div
-                                    [ onClick (SelectProject index)
-                                    , class
-                                        ((if model.current == index then
-                                            "active"
-                                          else
-                                            "inactive"
-                                         )
-                                            ++ " item"
-                                        )
-                                    ]
-                                    [ text project.name ]
-                                ]
-                    )
+                    (\index project -> (viewProject model.current index project))
                     model.projects
                 )
             ]
@@ -120,17 +118,17 @@ view model =
         ]
 
 
-
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         SelectProject index ->
-            { model | current = index } ! [Navigation.newUrl ("#project/" ++ (toString index))]
+            { model | current = index } ! [ Navigation.newUrl ("#project/" ++ (toString index)) ]
+
         UrlChange location ->
             model ! []
 
 
-parseIdFromLocation : Navigation.Location -> (Maybe Int)
+parseIdFromLocation : Navigation.Location -> Maybe Int
 parseIdFromLocation location =
     parseHash (UrlParser.s "project" </> UrlParser.int) location
 
@@ -140,6 +138,7 @@ init location =
     case (parseIdFromLocation location) of
         Just value ->
             { initialModel | current = value } ! []
+
         Nothing ->
             initialModel ! []
 

@@ -9944,74 +9944,90 @@ var _user$project$ProjectList$Project = F3(
 var _user$project$ProjectList$initialModel = {
 	projects: {
 		ctor: '::',
-		_0: A3(_user$project$ProjectList$Project, 'Cool Synth', 'http://www.clawtros.com/synth/', 'WebAudio oscillator toy'),
+		_0: A3(_user$project$ProjectList$Project, 'De Jong Attractor', 'http://www.clawtros.com/pdj.html', 'Click and drag to alter values'),
 		_1: {
 			ctor: '::',
-			_0: A3(_user$project$ProjectList$Project, 'Text Renderer', 'http://www.clawtros.com/textrender.html', 'Drop-in ASCII THREE.js renderer.'),
+			_0: A3(_user$project$ProjectList$Project, 'Reaction Diffusion', 'http://www.clawtros.com/rd/', 'Reaction / Diffusion as a WebGL Shader'),
 			_1: {
 				ctor: '::',
-				_0: A3(_user$project$ProjectList$Project, 'Goop', 'http://clawtros.com/goop/', 'I have no idea how this works.'),
+				_0: A3(_user$project$ProjectList$Project, 'Interactive Joy Division', 'http://www.clawtros.com/joy.html', 'Hover to make waves'),
 				_1: {
 					ctor: '::',
-					_0: A3(_user$project$ProjectList$Project, 'Glitchy Art Maker', 'http://clawtros.com/backgrounds/', 'Attempting to recreate goop.'),
+					_0: A3(_user$project$ProjectList$Project, 'Cool Synth', 'http://www.clawtros.com/synth/', 'WebAudio oscillator toy'),
 					_1: {
 						ctor: '::',
-						_0: A3(_user$project$ProjectList$Project, 'Mandelbrot', 'http://mandelbutt.com/', 'Raw WebGL Mandelbrot zoomer.'),
+						_0: A3(_user$project$ProjectList$Project, 'Text Renderer', 'http://www.clawtros.com/textrender.html', 'Drop-in ASCII THREE.js renderer.'),
 						_1: {
 							ctor: '::',
-							_0: A3(_user$project$ProjectList$Project, 'Terrain', 'http://clawtros.com/maze-terrain/', 'Accidentally made while experimenting with maze generation, the A* algorithm and THREE.js'),
+							_0: A3(_user$project$ProjectList$Project, 'Goop', 'http://clawtros.com/goop/', 'I have no idea how this works.'),
 							_1: {
 								ctor: '::',
-								_0: A3(_user$project$ProjectList$Project, 'Crossword Player', 'http://clawtros.com/clientcross/', 'Reacty Crossword player'),
+								_0: A3(_user$project$ProjectList$Project, 'Glitchy Art Maker', 'http://clawtros.com/backgrounds/', 'Attempting to recreate goop.'),
 								_1: {
 									ctor: '::',
-									_0: A3(_user$project$ProjectList$Project, 'D3 Update/Exit', 'http://clawtros.com/d3.html', 'Getting D3 enter/update/exit sorted'),
+									_0: A3(_user$project$ProjectList$Project, 'Mandelbrot', 'http://mandelbutt.com/', 'Raw WebGL Mandelbrot zoomer.'),
 									_1: {
 										ctor: '::',
-										_0: A3(_user$project$ProjectList$Project, 'Worst Phonetic Dictionary', 'http://phonetic.removablefeast.com/', 'Bad phonetic dictionaries'),
+										_0: A3(_user$project$ProjectList$Project, 'Terrain', 'http://clawtros.com/maze-terrain/', 'Accidentally made while experimenting with maze generation, the A* algorithm and THREE.js'),
 										_1: {
 											ctor: '::',
-											_0: A3(_user$project$ProjectList$Project, 'Crossword Generator', 'http://clawtros.com/recursin-workers/', 'Recursive web workers generating crosswords'),
+											_0: A3(_user$project$ProjectList$Project, 'Crossword Player', 'http://clawtros.com/clientcross/', 'Reacty Crossword player'),
 											_1: {
 												ctor: '::',
-												_0: A3(_user$project$ProjectList$Project, 'Floating', 'http://clawtros.com/floating.html', 'Dots floating on vectors.'),
+												_0: A3(_user$project$ProjectList$Project, 'D3 Update/Exit', 'http://clawtros.com/d3.html', 'Getting D3 enter/update/exit sorted'),
 												_1: {
 													ctor: '::',
-													_0: A3(_user$project$ProjectList$Project, 'Marriage', 'http://deeznups.clawtros.com/', 'Solving life\'s greatest problems'),
+													_0: A3(_user$project$ProjectList$Project, 'Worst Phonetic Dictionary', 'http://phonetic.removablefeast.com/', 'Bad phonetic dictionaries'),
 													_1: {
 														ctor: '::',
-														_0: A3(_user$project$ProjectList$Project, 'Lorenz', 'http://clawtros.com/waterwheel/', 'Playing with Canvas and D3.'),
+														_0: A3(_user$project$ProjectList$Project, 'Crossword Generator', 'http://clawtros.com/recursin-workers/', 'Recursive web workers generating crosswords'),
 														_1: {
 															ctor: '::',
-															_0: A3(_user$project$ProjectList$Project, 'Voronoi', 'http://clawtros.com/voronoi/', 'Naive Voronoi shades.'),
+															_0: A3(_user$project$ProjectList$Project, 'Floating', 'http://clawtros.com/floating.html', 'Dots floating on vectors.'),
 															_1: {
 																ctor: '::',
-																_0: A3(_user$project$ProjectList$Project, 'Minutes til\' Five', 'http://minutes-til-five.com/', 'Countdown Clock'),
+																_0: A3(_user$project$ProjectList$Project, 'Marriage', 'http://deeznups.clawtros.com/', 'Solving life\'s greatest problems'),
 																_1: {
 																	ctor: '::',
-																	_0: A3(_user$project$ProjectList$Project, 'Ulam Spirals', 'http://removablefeast.com/spiral.html', 'I think this was the first thing I made with Canvas?'),
+																	_0: A3(_user$project$ProjectList$Project, 'Lorenz', 'http://clawtros.com/waterwheel/', 'Playing with Canvas and D3.'),
 																	_1: {
 																		ctor: '::',
-																		_0: A3(_user$project$ProjectList$Project, 'Cat Look', 'http://removablefeast.com/catlook', 'Cats looking'),
+																		_0: A3(_user$project$ProjectList$Project, 'Voronoi', 'http://clawtros.com/voronoi/', 'Naive Voronoi shades.'),
 																		_1: {
 																			ctor: '::',
-																			_0: A3(_user$project$ProjectList$Project, 'Deal With Itifier', 'http://deal.removablefeast.com/?url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*l7zNW_4-afEOfP_mXxs75w.jpeg', 'Sunglass Applicator'),
+																			_0: A3(_user$project$ProjectList$Project, 'Minutes til\' Five', 'http://minutes-til-five.com/', 'Countdown Clock'),
 																			_1: {
 																				ctor: '::',
-																				_0: A3(_user$project$ProjectList$Project, 'Drips', 'http://clawtros.com/drips', 'Averaging HSV colours with surroundings'),
+																				_0: A3(_user$project$ProjectList$Project, 'Ulam Spirals', 'http://removablefeast.com/spiral.html', 'I think this was the first thing I made with Canvas?'),
 																				_1: {
 																					ctor: '::',
-																					_0: A3(_user$project$ProjectList$Project, 'Bouncing Balls', 'http://clawtros.com/google-bouncing-balls/', 'Modification of a recreation of a Google Doodle'),
+																					_0: A3(_user$project$ProjectList$Project, 'Cat Look', 'http://removablefeast.com/catlook', 'Cats looking'),
 																					_1: {
 																						ctor: '::',
-																						_0: A3(_user$project$ProjectList$Project, 'Alternate Fingering', 'http://fingers.removablefeast.com/', ''),
+																						_0: A3(_user$project$ProjectList$Project, 'Deal With Itifier', 'http://deal.removablefeast.com/?url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*l7zNW_4-afEOfP_mXxs75w.jpeg', 'Sunglass Applicator'),
 																						_1: {
 																							ctor: '::',
-																							_0: A3(_user$project$ProjectList$Project, 'Name Generators', 'http://names.removablefeast.com/', 'NLTK'),
+																							_0: A3(_user$project$ProjectList$Project, 'Drips', 'http://clawtros.com/drips', 'Averaging HSV colours with surroundings'),
 																							_1: {
 																								ctor: '::',
-																								_0: A3(_user$project$ProjectList$Project, 'TTC Locator', 'http://ttc.removablefeast.com/', 'All the Toronto Transit Commission vehicles'),
-																								_1: {ctor: '[]'}
+																								_0: A3(_user$project$ProjectList$Project, 'Bouncing Balls', 'http://clawtros.com/google-bouncing-balls/', 'Modification of a recreation of a Google Doodle'),
+																								_1: {
+																									ctor: '::',
+																									_0: A3(_user$project$ProjectList$Project, 'Alternate Fingering', 'http://fingers.removablefeast.com/', 'Alternate uses of knuckle tattoos'),
+																									_1: {
+																										ctor: '::',
+																										_0: A3(_user$project$ProjectList$Project, 'CSS Parallax', 'http://clawtros.com/forest/', 'Hover and move the mouse for depthy motion'),
+																										_1: {
+																											ctor: '::',
+																											_0: A3(_user$project$ProjectList$Project, 'Name Generators', 'http://names.removablefeast.com/', 'NLTK'),
+																											_1: {
+																												ctor: '::',
+																												_0: A3(_user$project$ProjectList$Project, 'TTC Locator', 'http://ttc.removablefeast.com/', 'All the Toronto Transit Commission vehicles'),
+																												_1: {ctor: '[]'}
+																											}
+																										}
+																									}
+																								}
 																							}
 																						}
 																					}
@@ -10035,7 +10051,7 @@ var _user$project$ProjectList$initialModel = {
 			}
 		}
 	},
-	current: 1
+	current: 0
 };
 var _user$project$ProjectList$init = function (location) {
 	var _p2 = _user$project$ProjectList$parseIdFromLocation(location);
@@ -10063,6 +10079,73 @@ var _user$project$ProjectList$UrlChange = function (a) {
 var _user$project$ProjectList$SelectProject = function (a) {
 	return {ctor: 'SelectProject', _0: a};
 };
+var _user$project$ProjectList$viewProject = F3(
+	function (current, index, project) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$ProjectList$SelectProject(index)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$classList(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'item', _1: true},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'active',
+									_1: _elm_lang$core$Native_Utils.eq(current, index)
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'inactive',
+										_1: !_elm_lang$core$Native_Utils.eq(current, index)
+									},
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('project-header'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(project.name),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('project-description'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(project.description),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
 var _user$project$ProjectList$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -10094,61 +10177,15 @@ var _user$project$ProjectList$view = function (model) {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('description'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(
-									function (_) {
-										return _.description;
-									}(
-										_user$project$ProjectList$getCurrent(model))),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{ctor: '[]'},
-								A2(
-									_elm_lang$core$List$indexedMap,
-									F2(
-										function (index, project) {
-											return A2(
-												_elm_lang$html$Html$div,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$div,
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html_Events$onClick(
-																_user$project$ProjectList$SelectProject(index)),
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$class(
-																	A2(
-																		_elm_lang$core$Basics_ops['++'],
-																		_elm_lang$core$Native_Utils.eq(model.current, index) ? 'active' : 'inactive',
-																		' item')),
-																_1: {ctor: '[]'}
-															}
-														},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text(project.name),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												});
-										}),
-									model.projects)),
-							_1: {ctor: '[]'}
-						}
+							{ctor: '[]'},
+							A2(
+								_elm_lang$core$List$indexedMap,
+								F2(
+									function (index, project) {
+										return A3(_user$project$ProjectList$viewProject, model.current, index, project);
+									}),
+								model.projects)),
+						_1: {ctor: '[]'}
 					}
 				}),
 			_1: {
