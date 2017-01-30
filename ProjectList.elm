@@ -66,11 +66,6 @@ initialModel =
     }
 
 
-css : String -> Html Msg
-css path =
-    node "link" [ rel "stylesheet", href path ] []
-
-
 getCurrent : Model -> Maybe Project
 getCurrent model =
     listGet model.projects model.current
@@ -82,14 +77,16 @@ viewCurrent model =
         Just current ->
             div [ class "content" ]
                 [ iframe
-                      [ current
-                      |> .url
-                      |> src
-                      ]
-                      []
+                    [ current
+                        |> .url
+                        |> src
+                    ]
+                    []
                 ]
+
         Nothing ->
             text ""
+
 
 viewProject : Int -> Int -> Project -> Html Msg
 viewProject current index project =

@@ -9925,21 +9925,6 @@ var _user$project$ProjectList$update = F2(
 			return A2(_user$project$ProjectList$navigateToLocation, model, _p1._0);
 		}
 	});
-var _user$project$ProjectList$css = function (path) {
-	return A3(
-		_elm_lang$html$Html$node,
-		'link',
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$rel('stylesheet'),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$href(path),
-				_1: {ctor: '[]'}
-			}
-		},
-		{ctor: '[]'});
-};
 var _user$project$ProjectList$listGet = F2(
 	function (xs, n) {
 		return _elm_lang$core$List$head(
