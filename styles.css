@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 body * {
     box-sizing: border-box;
 }
@@ -14,6 +18,10 @@ body * {
 
 .item:hover {
     text-decoration: underline;
+}
+
+.item.active {
+    background-color: palegoldenrod;
 }
 
 .item.active:hover {

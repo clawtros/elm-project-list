@@ -2,7 +2,7 @@ module ProjectList exposing (..)
 
 import Navigation
 import Html exposing (..)
-import Html.Attributes exposing (class, rel, href, src)
+import Html.Attributes exposing (class, classList, rel, href, src)
 import Html.Events exposing (onClick)
 import Dict exposing (Dict)
 
@@ -17,7 +17,9 @@ type alias Project =
 projectList : List ( String, Project )
 projectList =
     [ ( "rbtree", Project "Red Black Tree" "http://www.clawtros.com/treeviz/" "" )
-    , ( "dejong", Project "De Jong Attractor" "http://www.clawtros.com/pdj.html" "sin and cos make shapes" )
+    , ( "dejong", Project "De Jong Attractor" "http://www.clawtros.com/pdj.html" "" )
+    , ( "reaction-diffusion", Project "Reaction Diffusion" "http://www.clawtros.com/rd/" "" )
+    , ( "explodingdots", Project "Exploding Dots" "http://www.clawtros.com/avernus.html" "" )
     , ( "joydivision", Project "Interactive Joy Division" "http://www.clawtros.com/joy.html" "Interactive Joy Division cover using SVG driven by JS" )
     , ( "synth", Project "Synth-ish" "http://www.clawtros.com/synth/" "WebAudio oscillator toy" )
     , ( "threetext", Project "Text Renderer" "http://www.clawtros.com/textrender.html" "Drop-in ASCII THREE.js renderer." )
@@ -75,6 +77,18 @@ getCurrent key =
     Dict.get key projectDict
 
 
+viewProject : Project -> String -> Bool -> Html Msg
+viewProject project key isActive =
+    div
+        [ classList
+            [ ( "item", True )
+            , ( "active", isActive )
+            ]
+        , onClick <| SelectProject key
+        ]
+        [ text project.name ]
+
+
 view : Model -> Html Msg
 view model =
     div [ class "container" ]
@@ -82,9 +96,7 @@ view model =
             [ h1 [] [ text "clawtros.com" ]
             , div []
                 (List.map
-                    (\( key, project ) ->
-                        div [ onClick <| SelectProject key ] [ text project.name ]
-                    )
+                    (\( key, project ) -> viewProject project key (model == key))
                     projectList
                 )
             ]
