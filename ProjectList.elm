@@ -93,17 +93,9 @@ viewCurrent model =
         Just current ->
             div
                 [ class "content"
-                , style "left" "200px"
-                , style "position" "absolute"
-                , style "right" "0"
-                , style "bottom" "0"
-                , style "top" "0"
                 ]
                 [ iframe
-                    [ style "height" "100%"
-                    , style "width" "100%"
-                    , style "border" "0"
-                    , current
+                    [ current
                         |> .url
                         |> src
                     ]
@@ -145,7 +137,7 @@ view model =
     , body =
         [ div [ class "container" ]
             [ div [ class "menu" ]
-                [ div [ style "position" "absolute", style "top" "0", style "width" "200px" ]
+                [ div [  ]
                     [ h1 [] [ text "clawtros.com" ]
                     , viewProjects model.projects model.current
                     ]
