@@ -30,6 +30,7 @@ type alias Model =
     , current : String
     , key : Nav.Key
     , jsonLocation : String
+    , projectOrder : List String
     }
 
 
@@ -52,6 +53,7 @@ initialModel flags key url =
     , jsonLocation = flags.jsonLocation
     , key = key
     , current = keyFromUrl url
+    , projectOrder = []
     }
 
 
@@ -97,11 +99,15 @@ viewProject current keyval =
             ]
 
 
-viewProjects : Dict String Project -> String -> Html Msg
-viewProjects projects current =
-    projects
-        |> Dict.toList
-        |> List.map (viewProject current)
+viewProjects : List String -> Dict String Project -> String -> Html Msg
+viewProjects order projects current =
+    List.map
+        (\key ->
+            Maybe.withDefault (text "") <|
+                Maybe.map (\project -> viewProject current ( key, project )) <|
+                    Dict.get key projects
+        )
+        order
         |> div []
 
 
@@ -113,7 +119,7 @@ view model =
             [ div [ class "menu" ]
                 [ div []
                     [ h1 [] [ text "clawtros.com" ]
-                    , viewProjects model.projects model.current
+                    , viewProjects model.projectOrder model.projects model.current
                     ]
                 ]
             , viewCurrent model
@@ -188,9 +194,13 @@ main =
                     projects =
                         Decode.decodeString projectsDecoder flags.jsonLocation
                             |> Result.withDefault []
-                 
                 in
-                    ( { model | projects = projectDict projects }, Cmd.none )
+                    ( { model
+                        | projects = projectDict projects
+                        , projectOrder = List.map .id projects
+                      }
+                    , Cmd.none
+                    )
             )
         , view = view
         , update = update
