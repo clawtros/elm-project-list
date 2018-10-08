@@ -3,174 +3,180 @@
     "id": "hexes",
     "description": "",
     "title": "Hexes",
-    "url": "http://www.clawtros.com/hexes/"
+    "url": "https://clawtros.com/hexes/"
   },
   {
-    "id":"dejong",
-    "description": "Click and drag to alter values",
-    "title": "De Jong Attractor",
-    "url": "http://www.clawtros.com/pdj.html"
-  },
-  {
-    "id":"rd",
-    "description": "Reaction / Diffusion as a WebGL Shader",
-    "title": "Reaction Diffusion",
-    "url": "http://www.clawtros.com/rd/"
-  },
-  {
-    "id":"joy",
-    "description": "Hover to make waves",
-    "title": "Interactive Joy Division",
-    "url": "http://www.clawtros.com/joy.html"
-  },
-  {
-    "id":"avernus",
+    "id": "rb",
     "description": "",
-    "title": "Scary Circle",
-    "url": "http://www.clawtros.com/avernus.html"
-  },
-  {
-    "id":"syn",
-    "description": "WebAudio oscillator toy",
-    "title": "Cool Synth",
-    "url": "http://www.clawtros.com/synth/"
-  },
-  {
-    "id":"txtren",
-    "description": "Drop-in ASCII THREE.js renderer.",
-    "title": "Text Renderer",
-    "url": "http://www.clawtros.com/textrender.html"
-  },
-  {
-    "id":"goop",
-    "description": "I have no idea how this works.",
-    "title": "Goop",
-    "url": "http://clawtros.com/goop/"
-  },
-  {
-    "id":"glitch",
-    "description": "Attempting to recreate goop.",
-    "title": "Glitchy Art Maker",
-    "url": "http://clawtros.com/backgrounds/"
-  },
-  {
-    "id":"mandelbrot",
-    "description": "Raw WebGL Mandelbrot zoomer.",
-    "title": "Mandelbrot",
-    "url": "http://mandelbutt.com/"
-  },
-  {
-    "id":"terrain",
-    "description": "Accidentally made while experimenting with maze generation, the A* algorithm and THREE.js",
-    "title": "Terrain",
-    "url": "http://clawtros.com/maze-terrain/"
-  },
-  {
-    "id":"cwp",
-    "description": "Reacty Crossword player",
-    "title": "Crossword Player",
-    "url": "http://clawtros.com/clientcross/"
-  },
-  {
-    "id":"d3",
-    "description": "Getting D3 enter/update/exit sorted",
-    "title": "D3 Update/Exit",
-    "url": "http://clawtros.com/d3.html"
-  },
-  {
-    "id":"wpd",
-    "description": "Bad phonetic dictionaries",
-    "title": "Worst Phonetic Dictionary",
-    "url": "http://phonetic.removablefeast.com/"
-  },
-  {
-    "id":"cwg",
-    "description": "Recursive web workers generating crosswords",
-    "title": "Crossword Generator",
-    "url": "http://clawtros.com/recursin-workers/"
-  },
-  {
-    "id":"float",
-    "description": "Dots floating on vectors.",
-    "title": "Floating",
-    "url": "http://clawtros.com/floating.html"
-  },
-  {
-    "id":"marr",
-    "description": "Solving life's greatest problems",
-    "title": "Marriage",
-    "url": "http://deeznups.clawtros.com/"
-  },
-  {
-    "id":"lorenz",
-    "description": "Playing with Canvas and D3.",
-    "title": "Lorenz",
-    "url": "http://clawtros.com/waterwheel/"
-  },
-  {
-    "id":"vor",
-    "description": "Naive Voronoi shades.",
-    "title": "Voronoi",
-    "url": "http://clawtros.com/voronoi/"
-  },
-  {
-    "id":"minstil5",
-    "description": "Countdown Clock",
-    "title": "Minutes til' Five",
-    "url": "http://minutes-til-five.com/"
-  },
-  {
-    "id":"ulam",
-    "description": "I think this was the first thing I made with Canvas?",
-    "title": "Ulam Spirals",
-    "url": "http://removablefeast.com/spiral.html"
-  },
-  {
-    "id":"cat",
-    "description": "Cats looking",
-    "title": "Cat Look",
-    "url": "http://removablefeast.com/catlook"
-  },
-  {
-    "id":"deal",
-    "description": "Sunglass Applicator",
-    "title": "Deal With Itifier",
-    "url": "http://deal.removablefeast.com/?url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*l7zNW_4-afEOfP_mXxs75w.jpeg"
-  },
-  {
-    "id":"drip",
-    "description": "Averaging HSV colours with surroundings",
-    "title": "Drips",
-    "url": "http://clawtros.com/drips"
-  },
-  {
-    "id":"bounce",
-    "description": "Modification of a recreation of a Google Doodle",
-    "title": "Bouncing Balls",
-    "url": "http://clawtros.com/google-bouncing-balls/"
-  },
-  {
-    "id":"alt",
-    "description": "Alternate uses of knuckle tattoos",
-    "title": "Alternate Fingering",
-    "url": "http://fingers.removablefeast.com/"
-  },
-  {
-    "id":"cssp",
-    "description": "Hover and move the mouse for depthy motion",
-    "title": "CSS Parallax",
-    "url": "http://clawtros.com/forest/"
-  },
-  {
-    "id":"names",
-    "description": "NLTK",
-    "title": "Name Generators",
-    "url": "http://names.removablefeast.com/"
+    "title": "Red Black Tree",
+    "url": "https://clawtros.com/treeviz/"
   },
   {
     "id":"ttc",
     "description": "All the Toronto Transit Commission vehicles",
     "title": "TTC Locator",
-    "url": "http://ttc.removablefeast.com/"
+    "url": "https://ttc.removablefeast.com/"
+  },
+  {
+    "id":"dejong",
+    "description": "Click and drag to alter values",
+    "title": "De Jong Attractor",
+    "url": "https://clawtros.com/pdj.html"
+  },
+  {
+    "id":"rd",
+    "description": "Reaction / Diffusion as a WebGL Shader",
+    "title": "Reaction Diffusion",
+    "url": "https://clawtros.com/rd/"
+  },
+  {
+    "id":"joy",
+    "description": "Hover to make waves",
+    "title": "Interactive Joy Division",
+    "url": "https://clawtros.com/joy.html"
+  },
+  {
+    "id":"avernus",
+    "description": "",
+    "title": "Scary Circle",
+    "url": "https://clawtros.com/avernus.html"
+  },
+  {
+    "id":"syn",
+    "description": "WebAudio oscillator toy",
+    "title": "Cool Synth",
+    "url": "https://clawtros.com/synth/"
+  },
+  {
+    "id":"txtren",
+    "description": "Drop-in ASCII THREE.js renderer.",
+    "title": "Text Renderer",
+    "url": "https://clawtros.com/textrender.html"
+  },
+  {
+    "id":"goop",
+    "description": "I have no idea how this works.",
+    "title": "Goop",
+    "url": "https://clawtros.com/goop/"
+  },
+  {
+    "id":"glitch",
+    "description": "Attempting to recreate goop.",
+    "title": "Glitchy Art Maker",
+    "url": "https://clawtros.com/backgrounds/"
+  },
+  {
+    "id":"mandelbrot",
+    "description": "Raw WebGL Mandelbrot zoomer.",
+    "title": "Mandelbrot",
+    "url": "https://clawtros.com/webgl-mandelbrot/"
+  },
+  {
+    "id":"terrain",
+    "description": "Accidentally made while experimenting with maze generation, the A* algorithm and THREE.js",
+    "title": "Terrain",
+    "url": "https://clawtros.com/maze-terrain/"
+  },
+  {
+    "id":"cwp",
+    "description": "Reacty Crossword player",
+    "title": "Crossword Player",
+    "url": "https://clawtros.com/clientcross/"
+  },
+  {
+    "id":"d3",
+    "description": "Getting D3 enter/update/exit sorted",
+    "title": "D3 Update/Exit",
+    "url": "https://clawtros.com/d3.html"
+  },
+  {
+    "id":"wpd",
+    "description": "Bad phonetic dictionaries",
+    "title": "Worst Phonetic Dictionary",
+    "url": "https://phonetic.removablefeast.com/"
+  },
+  {
+    "id":"cwg",
+    "description": "Recursive web workers generating crosswords",
+    "title": "Crossword Generator",
+    "url": "https://clawtros.com/recursin-workers/"
+  },
+  {
+    "id":"float",
+    "description": "Dots floating on vectors.",
+    "title": "Floating",
+    "url": "https://clawtros.com/floating.html"
+  },
+  {
+    "id":"marr",
+    "description": "Solving life's greatest problems",
+    "title": "Marriage",
+    "url": "https://deeznups.clawtros.com/"
+  },
+  {
+    "id":"lorenz",
+    "description": "Playing with Canvas and D3.",
+    "title": "Lorenz",
+    "url": "https://clawtros.com/waterwheel/"
+  },
+  {
+    "id":"vor",
+    "description": "Naive Voronoi shades.",
+    "title": "Voronoi",
+    "url": "https://clawtros.com/voronoi/"
+  },
+  {
+    "id":"minstil5",
+    "description": "Countdown Clock",
+    "title": "Minutes til' Five",
+    "url": "https://minutes-til-five.com/"
+  },
+  {
+    "id":"ulam",
+    "description": "I think this was the first thing I made with Canvas?",
+    "title": "Ulam Spirals",
+    "url": "https://removablefeast.com/spiral.html"
+  },
+  {
+    "id":"cat",
+    "description": "Cats looking",
+    "title": "Cat Look",
+    "url": "https://removablefeast.com/catlook"
+  },
+  {
+    "id":"deal",
+    "description": "Sunglass Applicator",
+    "title": "Deal With Itifier",
+    "url": "https://deal.removablefeast.com/?url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*l7zNW_4-afEOfP_mXxs75w.jpeg"
+  },
+  {
+    "id":"drip",
+    "description": "Averaging HSV colours with surroundings",
+    "title": "Drips",
+    "url": "https://clawtros.com/drips"
+  },
+  {
+    "id":"bounce",
+    "description": "Modification of a recreation of a Google Doodle",
+    "title": "Bouncing Balls",
+    "url": "https://clawtros.com/google-bouncing-balls/"
+  },
+  {
+    "id":"alt",
+    "description": "Alternate uses of knuckle tattoos",
+    "title": "Alternate Fingering",
+    "url": "https://fingers.removablefeast.com/"
+  },
+  {
+    "id":"cssp",
+    "description": "Hover and move the mouse for depthy motion",
+    "title": "CSS Parallax",
+    "url": "https://clawtros.com/forest/"
+  },
+  {
+    "id":"names",
+    "description": "NLTK",
+    "title": "Name Generators",
+    "url": "https://names.removablefeast.com/"
   }
 ]
