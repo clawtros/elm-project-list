@@ -8,6 +8,7 @@ body * {
 
 .inactive {
     color: #ccc;
+    text-decoration: none;
 }
 
 .item {

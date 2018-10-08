@@ -1,167 +1,206 @@
 module ProjectList exposing (..)
 
-import Navigation
+import Browser exposing (..)
+import Browser.Navigation as Nav
+import String
+import Http
 import Html exposing (..)
-import Html.Attributes exposing (class, classList, rel, href, src)
+import Html.Attributes exposing (class, rel, href, src, classList, style)
 import Html.Events exposing (onClick)
-import Dict exposing (Dict)
+import Dict exposing (Dict, fromList, get)
+import Url exposing (Url)
+import Url.Parser
+import Json.Decode as Decode
 
 
 type alias Project =
-    { name : String
+    { id : String
+    , name : String
     , url : String
     , description : String
     }
 
 
-projectList : List ( String, Project )
-projectList =
-    [ ( "rbtree", Project "Red Black Tree" "http://www.clawtros.com/treeviz/" "" )
-    , ( "dejong", Project "De Jong Attractor" "http://www.clawtros.com/pdj.html" "" )
-    , ( "reaction-diffusion", Project "Reaction Diffusion" "http://www.clawtros.com/rd/" "" )
-    , ( "explodingdots", Project "Exploding Dots" "http://www.clawtros.com/avernus.html" "" )
-    , ( "joydivision", Project "Interactive Joy Division" "http://www.clawtros.com/joy.html" "Interactive Joy Division cover using SVG driven by JS" )
-    , ( "synth", Project "Synth-ish" "http://www.clawtros.com/synth/" "WebAudio oscillator toy" )
-    , ( "threetext", Project "Text Renderer" "http://www.clawtros.com/textrender.html" "Drop-in ASCII THREE.js renderer." )
-    , ( "goop", Project "Goop" "http://clawtros.com/goop/" "I have no idea how this works." )
-    , ( "textures", Project "Glitchy Art Maker" "http://clawtros.com/backgrounds/" "Made while attempting to recreate goop. Iterates convolutions, kinda?  Frontend using the choo framework." )
-    , ( "mandelbrot", Project "Mandelbrot" "http://mandelbutt.com/" "Raw WebGL Mandelbrot zoomer." )
-    , ( "terrain", Project "Terrain" "http://clawtros.com/maze-terrain/" "Accidentally made while experimenting with maze generation, the A* algorithm and THREE.js" )
-    , ( "reactword", Project "Crossword Player" "http://clawtros.com/clientcross/" "Reacty Crossword playe" )
-    , ( "d3", Project "D3 Update/Exit" "http://clawtros.com/d3.html" "Getting D3 enter/update/exit sorted" )
-    , ( "worstphonetic", Project "Worst Phonetic Dictionary" "http://phonetic.removablefeast.com/" "Bad phonetic dictionaries" )
-    , ( "crossgen", Project "Crossword Generator" "http://clawtros.com/recursin-workers/" "Web workers generating crosswords" )
-    , ( "floating", Project "Floating" "http://clawtros.com/floating.html" "Dots floating on vectors." )
-    , ( "marriage", Project "Marriage" "http://deeznups.clawtros.com/" "Solving life's greatest problems" )
-    , ( "lorenz", Project "Lorenz" "http://clawtros.com/waterwheel/" "Playing with Canvas and D3." )
-    , ( "voronoi", Project "Voronoi" "http://clawtros.com/voronoi/" "Naive Voronoi shades." )
-    , ( "til5", Project "Minutes til' Five" "http://minutes-til-five.com/" "Countdown Clock" )
-    , ( "ulam", Project "Ulam Spirals" "http://removablefeast.com/spiral.html" "I think this was the first thing I made with Canvas?" )
-    , ( "catlook", Project "Cat Look" "http://removablefeast.com/catlook" "Cats looking" )
-    , ( "deals", Project "Deal With Itifier" "http://deal.removablefeast.com/?url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*l7zNW_4-afEOfP_mXxs75w.jpeg" "Sunglass Applicator" )
-    , ( "drips", Project "Drips" "http://clawtros.com/drips" "Averaging HSV colours with surroundings" )
-    , ( "bouncing", Project "Bouncing Balls" "http://clawtros.com/google-bouncing-balls/" "Modification of a recreation of a Google Doodle" )
-    , ( "alternate", Project "Alternate Fingering" "http://fingers.removablefeast.com/" "" )
-    , ( "names", Project "Name Generators" "http://names.removablefeast.com/" "NLTK" )
-    , ( "parallax", Project "CSS Parallax" "http://clawtros.com/forest/" "Not _that_ parallax!" )
-    , ( "ttc", Project "TTC Locator" "http://ttc.removablefeast.com/" "All the Toronto Transit Commission vehicles" )
-    ]
-
-
-projectDict : Dict String Project
-projectDict =
-    Dict.fromList projectList
+type alias Route =
+    String
 
 
 type alias Model =
-    String
+    { projects : Dict String Project
+    , current : String
+    , key : Nav.Key
+    , jsonLocation : String
+    , projectOrder : List String
+    }
 
 
 type Msg
     = SelectProject String
-    | UrlChanged Navigation.Location
+    | HandleUrlRequest UrlRequest
+    | HandleUrlChange Url
+    | GotProjectList (Result Http.Error (List Project))
 
 
-listGet : List a -> Int -> Maybe a
-listGet xs n =
-    List.head (List.drop n xs)
+keyFromUrl : Url -> String
+keyFromUrl =
+    .fragment >> Maybe.withDefault ""
 
 
-initialModel : Model
-initialModel =
-    projectList |> List.head |> Maybe.map (\( key, _ ) -> key) |> Maybe.withDefault ""
+initialModel : Flags -> Nav.Key -> Url -> Model
+initialModel flags key url =
+    { projects =
+        Dict.empty
+    , jsonLocation = flags.jsonLocation
+    , key = key
+    , current =
+        keyFromUrl url
+    , projectOrder = []
+    }
 
 
-getCurrent : String -> Maybe Project
-getCurrent key =
-    Dict.get key projectDict
+viewCurrent : Model -> Html Msg
+viewCurrent model =
+    case Dict.get model.current model.projects of
+        Just current ->
+            div
+                [ class "content"
+                ]
+                [ iframe
+                    [ current
+                        |> .url
+                        |> src
+                    ]
+                    []
+                ]
+
+        Nothing ->
+            text ""
 
 
-viewProject : Project -> String -> Bool -> Html Msg
-viewProject project key isActive =
-    div
-        [ classList
-            [ ( "item", True )
-            , ( "active", isActive )
+viewProject : String -> ( String, Project ) -> Html Msg
+viewProject current keyval =
+    let
+        ( key, project ) =
+            keyval
+    in
+        a
+            [ href <| "#" ++ key
+            , classList
+                [ ( "item", True )
+                , ( "active", current == key )
+                , ( "inactive", not (current == key) )
+                ]
             ]
-        , onClick <| SelectProject key
-        ]
-        [ text project.name ]
+            [ div [ class "project-header" ] [ text project.name ]
+            ]
 
 
-view : Model -> Html Msg
+viewProjects : List String -> Dict String Project -> String -> Html Msg
+viewProjects order projects current =
+    List.map
+        (\key ->
+            Maybe.withDefault (text "") <|
+                Maybe.map (\project -> viewProject current ( key, project )) <|
+                    Dict.get key projects
+        )
+        order
+        |> div []
+
+
+view : Model -> Browser.Document Msg
 view model =
-    div [ class "container" ]
-        [ div [ class "menu" ]
-            [ h1 [] [ text "clawtros.com" ]
-            , div []
-                (List.map
-                    (\( key, project ) -> viewProject project key (model == key))
-                    projectList
-                )
-            ]
-        , div [ class "content" ]
-            [ case getCurrent model of
-                Just project ->
-                    iframe [ project.url |> src ] []
-
-                Nothing ->
-                    text "nothing"
+    { title = String.join "-" [ "clawtros.com", model.current ]
+    , body =
+        [ div [ class "container" ]
+            [ div [ class "menu" ]
+                [ div []
+                    [ h1 [] [ text "clawtros.com" ]
+                    , viewProjects model.projectOrder model.projects model.current
+                    ]
+                ]
+            , viewCurrent model
             ]
         ]
+    }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        SelectProject key ->
-            key ! [ Navigation.newUrl (toUrl key) ]
+        SelectProject index ->
+            ( { model | current = index }, Cmd.none )
 
-        UrlChanged location ->
-            model ! []
+        HandleUrlRequest (Internal url) ->
+            ( model, Nav.pushUrl model.key (Url.toString url) )
 
+        HandleUrlRequest (External stringUrl) ->
+            ( model, Cmd.none )
 
-init : Navigation.Location -> ( Model, Cmd Msg )
-init location =
-    case (Dict.get (toModel location) projectDict) of
-        Just _ ->
-            (toModel location) ! []
+        HandleUrlChange url ->
+            update (SelectProject <| keyFromUrl url) model
 
-        Nothing ->
-            initialModel ! []
+        GotProjectList (Ok projects) ->
+            ( { model | projects = projectDict projects }, Cmd.none )
 
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
+        GotProjectList (Err _) ->
+            ( model, Cmd.none )
 
 
-toUrl : Model -> String
-toUrl model =
-    case getCurrent model of
-        Just project ->
-            "#/" ++ model
-
-        Nothing ->
-            ""
+type alias Flags =
+    { jsonLocation : String }
 
 
-toModel : Navigation.Location -> Model
-toModel location =
-    String.dropLeft 2 location.hash
+projectDict : List Project -> Dict String Project
+projectDict projects =
+    projects
+        |> List.map
+            (\project -> ( project.id, project ))
+        |> Dict.fromList
 
 
-fromUrl : String -> Result String Int
-fromUrl url =
-    String.toInt (String.dropLeft 2 url)
+projectDecoder : Decode.Decoder Project
+projectDecoder =
+    Decode.map4 Project
+        (Decode.field "id" Decode.string)
+        (Decode.field "title" Decode.string)
+        (Decode.field "url" Decode.string)
+        (Decode.field "description" Decode.string)
 
 
-main : Program Never Model Msg
+projectsDecoder : Decode.Decoder (List Project)
+projectsDecoder =
+    Decode.list projectDecoder
+
+
+loadProjectList : Model -> Cmd Msg
+loadProjectList model =
+    Http.send GotProjectList <|
+        Http.get model.jsonLocation projectsDecoder
+
+
+main : Program Flags Model Msg
 main =
-    Navigation.program
-        UrlChanged
-        { init = init
+    Browser.application
+        { init =
+            (\flags url key ->
+                let
+                    model =
+                        initialModel flags key url
+
+                    projects =
+                        Decode.decodeString projectsDecoder flags.jsonLocation
+                            |> Result.withDefault []
+                in
+                    ( { model
+                        | projects = projectDict projects
+                        , projectOrder = List.map .id projects
+                      }
+                    , Cmd.none
+                    )
+            )
         , view = view
         , update = update
-        , subscriptions = subscriptions
+        , subscriptions = (always Sub.none)
+        , onUrlRequest = HandleUrlRequest
+        , onUrlChange = HandleUrlChange
         }
