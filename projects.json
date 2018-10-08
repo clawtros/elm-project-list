@@ -6,6 +6,12 @@
     "url": "https://clawtros.com/hexes/"
   },
   {
+    "id": "crayon",
+    "url": "https://clawtros.com/simplex-jammin/",
+    "description": "Simplex noise crayony thing",
+    "title": "Crayon Noise"
+  },
+  {
     "id": "rb",
     "description": "",
     "title": "Red Black Tree",
