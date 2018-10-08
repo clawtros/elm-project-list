@@ -193,11 +193,18 @@ main =
 
                     order =
                         List.map .id projects
+
+                    dict =
+                        projectDict projects
                 in
                     ( { model
-                        | projects = projectDict projects
+                        | projects = dict
                         , projectOrder = order
-                        , current = List.head order |> Maybe.withDefault ""
+                        , current =
+                            if Dict.get (keyFromUrl url) dict /= Nothing then
+                                keyFromUrl url
+                            else
+                                List.head order |> Maybe.withDefault ""
                       }
                     , Cmd.none
                     )

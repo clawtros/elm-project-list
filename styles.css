@@ -7,7 +7,6 @@ body * {
 }
 
 .inactive {
-    color: #ccc;
     text-decoration: none;
 }
 
@@ -19,6 +18,10 @@ body * {
 
 .item:hover {
     text-decoration: underline;
+}
+
+a.item {
+    color: #222;
 }
 
 .item.active {
