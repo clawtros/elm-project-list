@@ -190,10 +190,14 @@ main =
                     projects =
                         Decode.decodeString projectsDecoder flags.jsonLocation
                             |> Result.withDefault []
+
+                    order =
+                        List.map .id projects
                 in
                     ( { model
                         | projects = projectDict projects
-                        , projectOrder = List.map .id projects
+                        , projectOrder = order
+                        , current = List.head order |> Maybe.withDefault ""
                       }
                     , Cmd.none
                     )
