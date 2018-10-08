@@ -18,6 +18,10 @@ body, body * {
     color: #222;
 }
 
+.item.inactive {
+    text-decoration: none;
+}
+
 .menu {
     width: 280px;
     height: 100vh;
