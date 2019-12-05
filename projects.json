@@ -1,5 +1,11 @@
 [
   {
+    "id": "phex",
+    "description": "",
+    "title": "Wiggly Hexagons",
+    "url": "https://clawtros.com/phex/"
+  },
+  {
     "id": "hexes",
     "description": "",
     "title": "Hexes",
