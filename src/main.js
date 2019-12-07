@@ -1,5 +1,11 @@
-import { ProjectList } from "./ProjectList.elm";
+import { Elm } from "./ProjectList.elm";
+import json from "../projects.json";
 
-window.initProjectList = function(element) { 
-  ProjectList.embed({ node: node });
+window.initProjectList = function(node) { 
+  Elm.ProjectList.init({
+    node: node,
+    flags: {
+      projectJson: JSON.stringify(json)
+    }
+  });
 }

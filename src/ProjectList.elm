@@ -2,15 +2,15 @@ module ProjectList exposing (..)
 
 import Browser exposing (..)
 import Browser.Navigation as Nav
-import String
-import Http
-import Html exposing (..)
-import Html.Attributes exposing (class, rel, href, src, classList, style)
-import Html.Events exposing (onClick)
 import Dict exposing (Dict, fromList, get)
+import Html exposing (..)
+import Html.Attributes exposing (class, classList, href, rel, src, style)
+import Html.Events exposing (onClick)
+import Http
+import Json.Decode as Decode
+import String
 import Url exposing (Url)
 import Url.Parser
-import Json.Decode as Decode
 
 
 type alias Project =
@@ -25,11 +25,14 @@ type alias Route =
     String
 
 
+type alias Flags =
+    { projectJson : String }
+
+
 type alias Model =
     { projects : Dict String Project
     , current : String
     , key : Nav.Key
-    , jsonLocation : String
     , projectOrder : List String
     }
 
@@ -38,7 +41,6 @@ type Msg
     = SelectProject String
     | HandleUrlRequest UrlRequest
     | HandleUrlChange Url
-    | GotProjectList (Result Http.Error (List Project))
 
 
 keyFromUrl : Url -> String
@@ -50,7 +52,6 @@ initialModel : Flags -> Nav.Key -> Url -> Model
 initialModel flags key url =
     { projects =
         Dict.empty
-    , jsonLocation = flags.jsonLocation
     , key = key
     , current =
         keyFromUrl url
@@ -83,16 +84,16 @@ viewProject current keyval =
         ( key, project ) =
             keyval
     in
-        a
-            [ href <| "#" ++ key
-            , classList
-                [ ( "item", True )
-                , ( "active", current == key )
-                , ( "inactive", not (current == key) )
-                ]
+    a
+        [ href <| "#" ++ key
+        , classList
+            [ ( "item", True )
+            , ( "active", current == key )
+            , ( "inactive", not (current == key) )
             ]
-            [ div [ class "project-header" ] [ text project.name ]
-            ]
+        ]
+        [ div [ class "project-header" ] [ text project.name ]
+        ]
 
 
 viewProjects : List String -> Dict String Project -> String -> Html Msg
@@ -139,16 +140,6 @@ update msg model =
         HandleUrlChange url ->
             update (SelectProject <| keyFromUrl url) model
 
-        GotProjectList (Ok projects) ->
-            ( { model | projects = projectDict projects }, Cmd.none )
-
-        GotProjectList (Err _) ->
-            ( model, Cmd.none )
-
-
-type alias Flags =
-    { jsonLocation : String }
-
 
 projectDict : List Project -> Dict String Project
 projectDict projects =
@@ -172,23 +163,17 @@ projectsDecoder =
     Decode.list projectDecoder
 
 
-loadProjectList : Model -> Cmd Msg
-loadProjectList model =
-    Http.send GotProjectList <|
-        Http.get model.jsonLocation projectsDecoder
-
-
 main : Program Flags Model Msg
 main =
     Browser.application
         { init =
-            (\flags url key ->
+            \flags url key ->
                 let
                     model =
                         initialModel flags key url
 
                     projects =
-                        Decode.decodeString projectsDecoder flags.jsonLocation
+                        Decode.decodeString projectsDecoder flags.projectJson
                             |> Result.withDefault []
 
                     order =
@@ -197,21 +182,21 @@ main =
                     dict =
                         projectDict projects
                 in
-                    ( { model
-                        | projects = dict
-                        , projectOrder = order
-                        , current =
-                            if Dict.get (keyFromUrl url) dict /= Nothing then
-                                keyFromUrl url
-                            else
-                                List.head order |> Maybe.withDefault ""
-                      }
-                    , Cmd.none
-                    )
-            )
+                ( { model
+                    | projects = dict
+                    , projectOrder = order
+                    , current =
+                        if Dict.get (keyFromUrl url) dict /= Nothing then
+                            keyFromUrl url
+
+                        else
+                            List.head order |> Maybe.withDefault ""
+                  }
+                , Cmd.none
+                )
         , view = view
         , update = update
-        , subscriptions = (always Sub.none)
+        , subscriptions = always Sub.none
         , onUrlRequest = HandleUrlRequest
         , onUrlChange = HandleUrlChange
         }
