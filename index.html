@@ -4,9 +4,13 @@
     <title>clawtros dot com</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
+    <script src="elm_projectlist.js"></script>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
-    <script src="./main.js"></script>
+    <div id="projectlist"></div>
   </body>
+  <script>
+    initProjectList(document.getElementById("projectlist"));
+  </script>
 </html>
